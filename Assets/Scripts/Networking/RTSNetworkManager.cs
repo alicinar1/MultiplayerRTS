@@ -6,6 +6,7 @@ using UnityEngine;
 public class RTSNetworkManager : NetworkManager
 {
     [SerializeField] private GameObject _unitSpawner;
+
     public override void OnServerAddPlayer(NetworkConnection conn)
     {
         base.OnServerAddPlayer(conn);
