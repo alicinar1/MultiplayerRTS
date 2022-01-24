@@ -30,7 +30,26 @@ public class UnitCommanGiver : MonoBehaviour
             return;
         }
 
+        if (hit.collider.TryGetComponent<Targetable>(out Targetable target))
+        {
+            if (target.hasAuthority)
+            {
+                TryMove(hit.point);
+                return;
+            }
+
+            TryTarget(target);
+            return;
+        }
         TryMove(hit.point);
+    }
+
+    private void TryTarget(Targetable target)
+    {
+        foreach (Unit selectedUnit in unitSelectionHandler.SelectedUnits)
+        {
+            selectedUnit.GetTargeter().CmdSetTargey(target.gameObject);
+        }
     }
 
     private void TryMove(Vector3 point)

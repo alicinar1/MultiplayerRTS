@@ -10,12 +10,18 @@ public class Unit : NetworkBehaviour
     [SerializeField] private UnitMovementController _unitMovement = null;
     [SerializeField] private UnityEvent _onSelected = null;
     [SerializeField] private UnityEvent _onDeselected = null;
+    [SerializeField] private Targeter _targeter = null;
 
     public static event Action<Unit> ServerOnUnitSpawned;
     public static event Action<Unit> ServerOnUnitDespawned;
     public static event Action<Unit> AuthorityOnUnitSpawned;
     public static event Action<Unit> AuthorityOnUnitDespawned;
     public UnitMovementController UnitMovementController { get { return _unitMovement; } }
+
+    public Targeter GetTargeter()
+    {
+        return _targeter;
+    }
 
     #region Server
 
