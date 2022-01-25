@@ -5,8 +5,10 @@ using UnityEngine;
 
 public class Targeter : NetworkBehaviour
 {
-    [SerializeField] private Targetable target;
-    
+    private Targetable _target;
+
+    public Targetable Target { get { return _target; } }
+
     #region Server
 
     [Command]
@@ -17,13 +19,13 @@ public class Targeter : NetworkBehaviour
             return;
         }
 
-        this.target = newTarget;
+        this._target = newTarget;
     }
 
     [Server]
     public void ClearTarget()
     {
-        target = null;
+        _target = null;
     }
 
     #endregion
