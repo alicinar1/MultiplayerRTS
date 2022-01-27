@@ -18,8 +18,16 @@ public class UnitSelectionHandler : MonoBehaviour
     private void Start()
     {
         mainCamera = Camera.main;
+
+        Unit.AuthorityOnUnitDespawned += AuthorityHandleUnitDespawned;
         //_player = NetworkClient.connection.identity.GetComponent<RTSPlayer>();
     }
+
+    private void OnDestroy()
+    {
+        Unit.AuthorityOnUnitDespawned -= AuthorityHandleUnitDespawned;
+    }
+
 
     private void Update()
     {
@@ -117,6 +125,11 @@ public class UnitSelectionHandler : MonoBehaviour
                 unit.Select();
             }
         }
+    }
+
+    private void AuthorityHandleUnitDespawned(Unit obj)
+    {
+        SelectedUnits.Remove(obj);
     }
 
 }
