@@ -20,14 +20,21 @@ public class UnitSelectionHandler : MonoBehaviour
         mainCamera = Camera.main;
 
         Unit.AuthorityOnUnitDespawned += AuthorityHandleUnitDespawned;
-        //_player = NetworkClient.connection.identity.GetComponent<RTSPlayer>();
+
+        GameOverHandler.ClientOnGameOver += ClientHandleGameOver;
+            //_player = NetworkClient.connection.identity.GetComponent<RTSPlayer>();
     }
 
     private void OnDestroy()
     {
         Unit.AuthorityOnUnitDespawned -= AuthorityHandleUnitDespawned;
+        GameOverHandler.ClientOnGameOver -= ClientHandleGameOver;
     }
 
+    private void ClientHandleGameOver(string obj)
+    {
+        enabled = false;
+    }
 
     private void Update()
     {
